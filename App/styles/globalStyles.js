@@ -20,7 +20,6 @@ export default styles = StyleSheet.create({
     flex: 1,
     backgroundColor: color.white,
     alignItems: "stretch",
-    top: 50,
   },
   jobBox: {
     borderWidth: 1.5,
@@ -28,15 +27,16 @@ export default styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     height: 82,
-    borderTopLeftRadius: 10,
+    opacity: 0.89,
     borderTopRightRadius: 10,
-    borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
+    backgroundColor: color.white,
   },
   textBoxText: {
     flex: 1,
+    opacity: 1,
     fontFamily: "Roboto",
-    fontSize: 12,
+    fontSize: 13,
     textShadowRadius: 2,
     padding: 2,
   },
@@ -47,6 +47,12 @@ export default styles = StyleSheet.create({
   tinyLogo: {
     height: "100%",
     width: "25%",
+    left: -6,
     justifyContent: "flex-start",
+  },
+  titleText: {
+    fontSize: 25,
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });
