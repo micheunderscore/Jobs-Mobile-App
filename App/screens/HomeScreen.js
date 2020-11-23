@@ -9,7 +9,7 @@ import {
   ImageBackground,
 } from "react-native";
 import { gql, useQuery } from "@apollo/client";
-import { _ } from "lodash";
+import _ from "lodash";
 
 import Loading from "./Loading";
 import styles from "../styles/globalStyles";
@@ -56,17 +56,18 @@ const JobItem = ({ job }) => {
 };
 
 export default ({ navigation }) => {
-  const [searchText, setSearchText] = useState("");
-  const [jobs, setJobs] = useState(jobs);
   const { data, loading } = useQuery(JOBS_QUERRY);
-
-  var filteredJobs = _.map(jobs, () => {
-    if (_.isIncluded([jobs.title], searchText)) return jobs;
-  });
+  // const [searchText, setSearchText] = useState("");         // Unfinished search bar method
+  // let lodedData;
+  // if (!loading) {
+  //   lodedData = data;
+  // }
 
   if (loading) {
     return <Loading />;
   }
+
+  // const [jobs, setJobs] = useState(lodedData);               // Unfinished search bar method
 
   return (
     <View style={styles.container}>
@@ -83,8 +84,13 @@ export default ({ navigation }) => {
         />
         <TextInput
           onChangeText={(text) => {
-            setSearchText(text);
-            setJobs(filteredJobs);
+            // if (!loading) {                                  // Unfinished search bar method
+            //   var filteredJobs = _.map(data.jobs, (j) => {
+            //     if (_.includes([j.title], searchText)) return j;
+            //   });
+            //   setJobs(filteredJobs);
+            // }
+            // setSearchText(text);
             console.log(text);
           }}
           style={{ left: 30 }}
@@ -93,7 +99,7 @@ export default ({ navigation }) => {
       </View>
       <FlatList
         style={styles.flatList}
-        data={data.jobs}
+        data={data.jobs} // Set to Jobs.Jobs if ever return to trying search bar.
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() => {
