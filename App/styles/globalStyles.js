@@ -32,6 +32,21 @@ export default styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     backgroundColor: color.white,
   },
+  searchBox: {
+    height: 25,
+    width: "90%",
+    left: 20,
+    bottom: 10,
+    borderRadius: 10,
+    backgroundColor: color.white,
+  },
+  searchIcon: {
+    top: 2,
+    height: 20,
+    width: 20,
+    position: "absolute",
+    opacity: 0.25,
+  },
   textBoxText: {
     flex: 1,
     opacity: 1,

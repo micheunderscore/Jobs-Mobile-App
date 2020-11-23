@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   FlatList,
@@ -9,11 +9,10 @@ import {
   ImageBackground,
 } from "react-native";
 import { gql, useQuery } from "@apollo/client";
+import { _ } from "lodash";
 
 import Loading from "./Loading";
 import styles from "../styles/globalStyles";
-import color from "../styles/colorPalette";
-import { stubArray } from "lodash";
 
 const JOBS_QUERRY = gql`
   query Jobs {
@@ -57,7 +56,13 @@ const JobItem = ({ job }) => {
 };
 
 export default ({ navigation }) => {
+  const [searchText, setSearchText] = useState("");
+  const [jobs, setJobs] = useState(jobs);
   const { data, loading } = useQuery(JOBS_QUERRY);
+
+  var filteredJobs = _.map(jobs, () => {
+    if (_.isIncluded([jobs.title], searchText)) return jobs;
+  });
 
   if (loading) {
     return <Loading />;
@@ -70,20 +75,19 @@ export default ({ navigation }) => {
         source={require("../assets/background.jpg")}
         resizeMode="cover"
       />
-      <Image
-        style={styles.centered}
-        source={require("../assets/Welcome.png")}
-        alignSelf="center"
-      />
       <View style={{ paddingBottom: 90 }} />
-      <View style={{ height: 25, left: 20 }}>
+      <View style={styles.searchBox}>
         <Image
-          style={{ top: 2, height: 20, width: 20, position: "absolute" }}
+          style={styles.searchIcon}
           source={require("../assets/search-icon.png")}
         />
         <TextInput
+          onChangeText={(text) => {
+            setSearchText(text);
+            setJobs(filteredJobs);
+            console.log(text);
+          }}
           style={{ left: 30 }}
-          alignSelf="stretch"
           placeholder="Looking for jobs?"
         />
       </View>
@@ -94,7 +98,6 @@ export default ({ navigation }) => {
           <TouchableOpacity
             onPress={() => {
               navigation.navigate("Job", { Info: item.id, item: item });
-              console.log(item);
             }}
           >
             <JobItem job={item} />

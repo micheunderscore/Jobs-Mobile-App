@@ -14,11 +14,12 @@ import HTMLView from "react-native-htmlview";
 
 function JobScreen({ navigation }) {
   const item = navigation.getParam("item");
-  const companyLogo =
-    item.company.logoUrl === ""
-      ? { uri: item.company.logoUrl }
-      : require("../assets/Welcome.png");
-  console.log(item.company.logoUrl); //IT WORKS!!!!!!! :DDDDD
+  var companyLogo = item.company.logoUrl;
+  if (companyLogo === null || companyLogo === "") {
+    companyLogo = require("../assets/Welcome.png");
+  } else {
+    companyLogo = { uri: item.company.logoUrl };
+  }
 
   return (
     <View>
@@ -42,7 +43,7 @@ function JobScreen({ navigation }) {
       >
         <Image
           style={[styles.tinyLogo, { width: "100%" }]}
-          resizeMode="cover"
+          resizeMode="contain"
           source={companyLogo}
         />
         <View style={{ alignItems: "center" }}>
@@ -56,11 +57,9 @@ function JobScreen({ navigation }) {
                 //console.log(item.applyUrl); //This Works
               }}
             >
-              <Button
-                style={{ padding: 10, width: "100%" }}
-                title="A P P L Y"
-              />
+              <Button style={{ width: "100%" }} title="A P P L Y" />
             </TouchableOpacity>
+            <View style={{ padding: 10 }} />
           </ScrollView>
         </View>
       </View>
