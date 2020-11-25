@@ -31,7 +31,7 @@ const JOBS_QUERRY = gql`
 `;
 
 const JobItem = ({ job }) => {
-  const { title, company, name, logoUrl, applyUrl, description } = job;
+  const { title, company, name, logoUrl } = job;
   const companyLogo = company.logoUrl
     ? { uri: company.logoUrl }
     : require("../assets/Welcome.png");

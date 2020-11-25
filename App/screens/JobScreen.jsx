@@ -10,7 +10,6 @@ import {
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 
 import styles from "../styles/globalStyles";
-import HTMLView from "react-native-htmlview";
 
 function JobScreen({ navigation }) {
   const item = navigation.getParam("item");
@@ -50,7 +49,7 @@ function JobScreen({ navigation }) {
           <Text style={styles.titleText}>{item.title}</Text>
           <Text style={{ fontStyle: "italic" }}>{item.company.name}</Text>
           <ScrollView style={{ height: "340%" }}>
-            <HTMLView value={item.description} />
+            <Text>{item.description}</Text>
             <TouchableOpacity
               onPress={() => {
                 Linking.openURL(item.applyUrl);
