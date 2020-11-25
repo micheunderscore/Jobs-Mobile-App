@@ -13,3 +13,4 @@ Jobs mobile app in development for Lava X internship assessment
 - used [BuilderX](https://builderx.io/) for the UI. Manual UI positioning = pain.
 - thought many more times before committing to a UI implementation.
 - looked more in-depth into JSX and React Native Community Packages.
+- figured out how to use a search bar to filter flatList results before implementing graphQL.
