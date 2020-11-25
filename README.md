@@ -8,7 +8,7 @@ Jobs mobile app in development for Lava X internship assessment
 - lodash
 - @apollo/client
 
-### Hindsights (Because lessons are important)
+## Hindsights (Because lessons are important)
 *I should have...*
 - used [BuilderX](https://builderx.io/) for the UI. Manual UI positioning = pain.
 - thought many more times before committing to a UI implementation.
