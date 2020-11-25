@@ -62,7 +62,7 @@ export default styles = StyleSheet.create({
   tinyLogo: {
     height: "100%",
     width: "25%",
-    left: -6,
+    left: -7,
     justifyContent: "flex-start",
   },
   titleText: {

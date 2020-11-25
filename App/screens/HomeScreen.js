@@ -25,16 +25,19 @@ const JOBS_QUERRY = gql`
       company {
         name
         logoUrl
+        websiteUrl
       }
     }
   }
 `;
 
 const JobItem = ({ job }) => {
-  const { title, company, name, logoUrl } = job;
-  const companyLogo = company.logoUrl
-    ? { uri: company.logoUrl }
-    : require("../assets/Welcome.png");
+  const { title, company, name, websiteUrl } = job;
+  const companyLogo = {
+    uri:
+      "https://logo.clearbit.com/" +
+      company.websiteUrl.replace("https://www.", ""),
+  }; // Double check if this works
 
   return (
     <View style={styles.jobBox}>

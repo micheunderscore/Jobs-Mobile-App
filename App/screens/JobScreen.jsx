@@ -13,12 +13,13 @@ import styles from "../styles/globalStyles";
 
 function JobScreen({ navigation }) {
   const item = navigation.getParam("item");
-  var companyLogo = item.company.logoUrl;
-  if (companyLogo === null || companyLogo === "") {
-    companyLogo = require("../assets/Welcome.png");
-  } else {
-    companyLogo = { uri: item.company.logoUrl };
-  }
+  const companyLogo = {
+    uri:
+      "https://logo.clearbit.com/" +
+      item.company.websiteUrl.replace("https://", "").replace("www.", ""),
+  };
+
+  console.log(companyLogo);
 
   return (
     <View>
