@@ -60,14 +60,6 @@ const JobItem = ({ job }) => {
 
 const callJobs = ({ data }) => {
   const [dispJobs, setDispJobs] = useState(data);
-  // let searchText = "";
-  // console.log("Search: " + filter);
-  // if (!loading) {
-  //   var filteredJobs = _.map(data.jobs, (j) => {
-  //     if (_.includes([j.title], searchText)) return j;
-  //   });
-  //   setJobs(filteredJobs);
-  // }
   return data;
 };
 
