@@ -37,7 +37,7 @@ const JobItem = ({ job }) => {
     uri:
       "https://logo.clearbit.com/" +
       company.websiteUrl.replace("https://www.", ""),
-  }; // Double check if this works
+  };
 
   return (
     <View style={styles.jobBox}>
@@ -58,19 +58,26 @@ const JobItem = ({ job }) => {
   );
 };
 
+const callJobs = ({ data }) => {
+  const [dispJobs, setDispJobs] = useState(data);
+  // let searchText = "";
+  // console.log("Search: " + filter);
+  // if (!loading) {
+  //   var filteredJobs = _.map(data.jobs, (j) => {
+  //     if (_.includes([j.title], searchText)) return j;
+  //   });
+  //   setJobs(filteredJobs);
+  // }
+  return data;
+};
+
 export default ({ navigation }) => {
   const { data, loading } = useQuery(JOBS_QUERRY);
-  // const [searchText, setSearchText] = useState("");         // Unfinished search bar method
-  // let lodedData;
-  // if (!loading) {
-  //   lodedData = data;
-  // }
+  const [searchText, setSearchText] = useState("");
 
   if (loading) {
     return <Loading />;
   }
-
-  // const [jobs, setJobs] = useState(lodedData);               // Unfinished search bar method
 
   return (
     <View style={styles.container}>
@@ -87,14 +94,8 @@ export default ({ navigation }) => {
         />
         <TextInput
           onChangeText={(text) => {
-            // if (!loading) {                                  // Unfinished search bar method
-            //   var filteredJobs = _.map(data.jobs, (j) => {
-            //     if (_.includes([j.title], searchText)) return j;
-            //   });
-            //   setJobs(filteredJobs);
-            // }
-            // setSearchText(text);
-            console.log(text);
+            setSearchText(text);
+            console.log("Search: " + searchText);
           }}
           style={{ left: 30 }}
           placeholder="Looking for jobs?"
@@ -102,16 +103,23 @@ export default ({ navigation }) => {
       </View>
       <FlatList
         style={styles.flatList}
-        data={data.jobs} // Set to Jobs.Jobs if ever return to trying search bar.
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("Job", { Info: item.id, item: item });
-            }}
-          >
-            <JobItem job={item} />
-          </TouchableOpacity>
-        )}
+        data={data.jobs}
+        renderItem={({ item }) => {
+          if (
+            item.title.toLowerCase().includes(searchText.toLowerCase()) ||
+            item.company.name.toLowerCase().includes(searchText.toLowerCase())
+          ) {
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("Job", { Info: item.id, item: item });
+                }}
+              >
+                <JobItem job={item} />
+              </TouchableOpacity>
+            );
+          }
+        }}
         keyExtractor={(job) => job.id.toString()}
       />
       <Text style={{ alignSelf: "center" }}>End of Results</Text>
