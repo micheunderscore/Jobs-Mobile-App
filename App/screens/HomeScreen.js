@@ -58,11 +58,6 @@ const JobItem = ({ job }) => {
   );
 };
 
-const callJobs = ({ data }) => {
-  const [dispJobs, setDispJobs] = useState(data);
-  return data;
-};
-
 export default ({ navigation }) => {
   const { data, loading } = useQuery(JOBS_QUERRY);
   const [searchText, setSearchText] = useState("");
